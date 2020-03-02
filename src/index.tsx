@@ -5,11 +5,14 @@
 import * as React from 'react';
 import PhotoSphereViewer from 'photo-sphere-viewer';
 import "./styles.css";
-import "./photo-sphere-viewer.min.css"
+import "photo-sphere-viewer/dist/photo-sphere-viewer.min.css"
 
 export interface Props {
   src: string;
   navbar?: string[];
+  height: number;
+  width?: number;
+
 }
 
 const defaultNavbar = [
@@ -18,7 +21,7 @@ const defaultNavbar = [
   'fullscreen'
 ];
 
-export default function ReactPhotoSphereViewer ({ src, navbar }: Props): React.ReactElement {
+export default function ReactPhotoSphereViewer ({ src, navbar, height, width }: Props): React.ReactElement {
   navbar = (navbar && navbar.length > 0) ? navbar : defaultNavbar;
   const sphereElementRef = React.createRef<HTMLDivElement>();
   React.useEffect(() => {
@@ -27,7 +30,8 @@ export default function ReactPhotoSphereViewer ({ src, navbar }: Props): React.R
         container: sphereElementRef.current,
         panorama: src,
         size: {
-          height: 500
+          height,
+          width
         },
         navbar: navbar
       });
