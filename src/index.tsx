@@ -1,23 +1,43 @@
 /**
- * @class ExampleComponent
+ * @class ReactPhotoSphereViewer
  */
 
-import * as React from 'react'
+import * as React from 'react';
+import PhotoSphereViewer from 'photo-sphere-viewer';
+import "./styles.css";
+import "./photo-sphere-viewer.min.css"
 
-import styles from './styles.css'
+export interface Props {
+  src: string;
+  navbar?: string[];
+}
 
-export type Props = { text: string }
+const defaultNavbar = [
+  'autorotate',
+  'zoom',
+  'fullscreen'
+];
 
-export default class ExampleComponent extends React.Component<Props> {
-  render() {
-    const {
-      text
-    } = this.props
+export default function ReactPhotoSphereViewer ({ src, navbar }: Props): React.ReactElement {
+  navbar = (navbar && navbar.length > 0) ? navbar : defaultNavbar;
+  const sphereElementRef = React.createRef<HTMLDivElement>();
+  React.useEffect(() => {
 
-    return (
-      <div className={styles.test}>
-        Example Component: {text}
-      </div>
-    )
-  }
+      const shperePlayerInstance = PhotoSphereViewer({
+        container: sphereElementRef.current,
+        panorama: src,
+        size: {
+          height: 500
+        },
+        navbar: navbar
+      });
+
+
+    return () => {
+      shperePlayerInstance.destroy();
+    };
+  }, [src]);
+  return (
+    <div className="view-container" ref={sphereElementRef} />
+  );
 }

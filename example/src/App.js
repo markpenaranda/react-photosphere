@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 
-import ExampleComponent from 'react-photosphere'
+import ReactPhotoSphereViewer from 'react-photosphere'
 
 export default class App extends Component {
   render () {
     return (
       <div>
-        <ExampleComponent text='Modern React component module' />
+        <ReactPhotoSphereViewer src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQNfXFNW1ti-GCNgWuc6rFhdtClHTpnxsx3pd9LYBMyUN_wJXt2"/>
       </div>
     )
   }
