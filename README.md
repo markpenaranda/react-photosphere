@@ -15,12 +15,13 @@ npm install --save react-photosphere
 ```tsx
 import * as React from 'react'
 
-import MyComponent from 'react-photosphere'
+import ReactPhotoSphereViewer from 'react-photosphere'
+
 
 class Example extends React.Component {
   render () {
     return (
-      <MyComponent />
+      <ReactPhotoSphereViewer src={YOUR_PHOTOSPHERE_URL} />
     )
   }
 }
