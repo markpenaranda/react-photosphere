@@ -6,7 +6,7 @@ export default class App extends Component {
   render () {
     return (
       <div>
-        <ReactPhotoSphereViewer height="500" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQNfXFNW1ti-GCNgWuc6rFhdtClHTpnxsx3pd9LYBMyUN_wJXt2"/>
+        <ReactPhotoSphereViewer height="500" timeAnim={false} src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQNfXFNW1ti-GCNgWuc6rFhdtClHTpnxsx3pd9LYBMyUN_wJXt2"/>
       </div>
     )
   }

@@ -12,7 +12,8 @@ export interface Props {
   navbar?: string[];
   height: number;
   width?: number;
-
+  timeAnim: number | boolean;
+  onPositionChange?(lat: number , lng: number): any;
 }
 
 const defaultNavbar = [
@@ -21,24 +22,33 @@ const defaultNavbar = [
   'fullscreen'
 ];
 
-export default function ReactPhotoSphereViewer ({ src, navbar, height, width }: Props): React.ReactElement {
+export default function ReactPhotoSphereViewer ({ src, navbar, height, width, timeAnim, onPositionChange }: Props): React.ReactElement {
   navbar = (navbar && navbar.length > 0) ? navbar : defaultNavbar;
   const sphereElementRef = React.createRef<HTMLDivElement>();
   React.useEffect(() => {
 
-      const shperePlayerInstance = PhotoSphereViewer({
+      const spherePlayerInstance = PhotoSphereViewer({
         container: sphereElementRef.current,
         panorama: src,
         size: {
           height,
           width
         },
-        navbar: navbar
+        navbar: navbar,
+        time_anim: timeAnim,
       });
 
+      spherePlayerInstance.on('position-updated', () => {
+
+        if(onPositionChange) {
+          const position = spherePlayerInstance.getPosition();
+          onPositionChange(position.lat, position.lng)
+        }
+
+      });
 
     return () => {
-      shperePlayerInstance.destroy();
+      spherePlayerInstance.destroy();
     };
   }, [src]);
   return (
